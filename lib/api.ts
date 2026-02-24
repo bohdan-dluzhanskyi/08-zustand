@@ -8,8 +8,9 @@ interface Answer {
 }
 
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+
 export async function fetchFilterNotes(
-  tag: string,
+  tag: FetchTagNote,
   page: number,
   search: string
 ): Promise<Answer> {
@@ -25,6 +26,7 @@ export async function fetchFilterNotes(
 
     return res.data;
   }
+
   if (tag !== 'all' && !search) {
     const res = await axios.get<Answer>(
       `https://notehub-public.goit.study/api/notes?tag=${tag}&page=${page}&perPage=12`,
@@ -50,6 +52,7 @@ export async function fetchFilterNotes(
 
     return res.data;
   }
+
   const res = await axios.get<Answer>(
     `https://notehub-public.goit.study/api/notes?search=${search}&tag=${tag}&page=${page}&perPage=12`,
     {
@@ -75,6 +78,7 @@ export async function createNote(note: NewNote): Promise<Note> {
 
   return res.data;
 }
+
 export async function deleteNote(id: string): Promise<Note> {
   const res = await axios.delete<Note>(
     `https://notehub-public.goit.study/api/notes/${id}`,

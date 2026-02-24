@@ -28,6 +28,7 @@ export default function Modal({ children, onClose }: ModalProps) {
     }
     document.addEventListener("keydown", closeModal);
     document.body.style.overflow = "hidden";
+
     return () => {
       document.removeEventListener("keydown", closeModal);
       document.body.style.overflow = "";
